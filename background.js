@@ -2,6 +2,7 @@ let urls = [];
 let index = 0;
 let yesList = [];
 let noList = [];
+let skipList = [];
 let currentTabId = null;
 
 function startClassification() {
@@ -10,6 +11,7 @@ function startClassification() {
     index = 0;
     yesList = [];
     noList = [];
+    let skipList = [];
     if (urls.length > 0) {
       loadNextURL();
     }
@@ -27,9 +29,12 @@ function loadNextURL() {
     }
   } else {
     chrome.tabs.remove(currentTabId);
-    chrome.storage.local.set({ yesList: yesList, noList: noList }, function () {
-      chrome.tabs.create({ url: chrome.runtime.getURL("results.html") });
-    });
+    chrome.storage.local.set(
+      { yesList: yesList, noList: noList, skipList: skipList },
+      function () {
+        chrome.tabs.create({ url: chrome.runtime.getURL("results.html") });
+      }
+    );
   }
 }
 
@@ -51,6 +56,10 @@ chrome.runtime.onMessage.addListener((message) => {
     } else {
       noList.push(urls[index]);
     }
+    index++;
+    loadNextURL();
+  } else if (message.action === "skip") {
+    skipList.push(urls[index]);
     index++;
     loadNextURL();
   } else if (message.action === "start") {

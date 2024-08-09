@@ -17,3 +17,25 @@ document.getElementById("start").addEventListener("click", function () {
     document.getElementById("status").textContent = "Please enter some URLs.";
   }
 });
+
+document.getElementById("skip").addEventListener("click", function () {
+  chrome.runtime.sendMessage({ action: "skip" });
+});
+
+
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  const currentTabUrl = new URL(tabs[0].url).hostname; // Extract hostname from URL
+
+  chrome.storage.local.get(["urls"], function (result) {
+    const storedUrls = result.urls || [];
+    const isInStorage = storedUrls.some(
+      (url) => new URL(url).hostname === currentTabUrl
+    );
+
+    if (isInStorage) {
+      document.getElementById("skip").style.display = "block";
+    } else {
+      document.getElementById("skip").style.display = "none";
+    }
+  });
+});
