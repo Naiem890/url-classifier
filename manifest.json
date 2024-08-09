@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "URL Classifier",
+  "version": "1.0",
+  "description": "Classify URLs into YES and NO lists using keyboard inputs.",
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
