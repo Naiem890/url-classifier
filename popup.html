@@ -8,26 +8,74 @@
       }
 
       body {
-        width: 400px;
-        height: 300px;
+        width: 500px;
         font-family: Arial, sans-serif;
-        padding: 10px;
-        box-sizing: border-box;
+        padding: 20px;
+        margin: 0;
+        background-color: #f9f9f9;
+        color: #333;
       }
+
+      h3 {
+        margin: 0 0 20px;
+        font-size: 1.8em;
+        color: #333;
+        text-align: center;
+      }
+
       textarea {
-        display: block;
         width: 100%;
-        height: 150px;
-        padding: 8px;
-        margin-bottom: 10px;
+        height: 160px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1.2em;
+        line-height: 1.4;
+        margin-bottom: 15px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
       }
+
       button {
         width: 100%;
-        padding: 10px;
-        margin: 5px;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.2em;
+        color: #fff;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease;
       }
+
+      #start {
+        background-color: #007bff; /* Blue */
+      }
+
+      #start:hover {
+        background-color: #0056b3; /* Darker Blue */
+      }
+
+      #skip {
+        background-color: #28a745; /* Green */
+      }
+
+      #skip:hover {
+        background-color: #218838; /* Darker Green */
+      }
+
+      #reset {
+        background-color: #dc3545; /* Red */
+      }
+
+      #reset:hover {
+        background-color: #c82333; /* Darker Red */
+      }
+
       #status {
-        margin-top: 10px;
+        margin-top: 15px;
+        font-size: 1.2em;
+        color: #d9534f;
+        text-align: center;
       }
     </style>
   </head>
@@ -38,7 +86,8 @@
       placeholder="Enter URLs here, one per line"
     ></textarea>
     <button id="start">Start Classification</button>
-    <button id="skip" style="display: none;">Skip</button>
+    <button id="skip" style="display: none">Skip</button>
+    <button id="reset" style="display: none">Reset</button>
     <div id="status"></div>
 
     <script src="popup.js"></script>

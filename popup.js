@@ -22,6 +22,18 @@ document.getElementById("skip").addEventListener("click", function () {
   chrome.runtime.sendMessage({ action: "skip" });
 });
 
+document.getElementById("reset").addEventListener("click", function () {
+  chrome.storage.local.remove(
+    ["urls", "yesList", "noList", "skipList"],
+    function () {
+      //   document.getElementById("status").textContent =
+      // "All data has been reset!";
+      document.getElementById("urlInput").value = "";
+      document.getElementById("skip").style.display = "none";
+      document.getElementById("reset").style.display = "none";
+    }
+  );
+});
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   const currentTabUrl = new URL(tabs[0].url).hostname; // Extract hostname from URL
@@ -38,4 +50,14 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       document.getElementById("skip").style.display = "none";
     }
   });
+});
+
+chrome.storage.local.get(["urls"], function (result) {
+  const urls = result.urls || [];
+  const resetButton = document.getElementById("reset");
+  if (urls.length > 0) {
+    resetButton.style.display = "block";
+  } else {
+    resetButton.style.display = "none";
+  }
 });
