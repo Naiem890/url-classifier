@@ -3,7 +3,7 @@
   "name": "URL Classifier",
   "version": "1.0",
   "description": "Classify URLs into YES and NO lists using keyboard inputs.",
-  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "permissions": ["storage", "activeTab", "tabs"],
   "background": {
     "service_worker": "background.js"
   },
